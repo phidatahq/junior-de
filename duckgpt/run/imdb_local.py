@@ -1,7 +1,7 @@
 from duckgpt.local.conversation import duckdb_agent, get_duckgpt_conversation
 from duckgpt.local.load_tables import load_tables
 
-duckgpt_conversation = get_duckgpt_conversation(debug_mode=True)
+duckgpt_conversation = get_duckgpt_conversation(debug_mode=False)
 
 LOAD_DATABASE = True
 if LOAD_DATABASE:
