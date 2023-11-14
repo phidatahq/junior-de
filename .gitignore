@@ -20,9 +20,6 @@
 .env
 .envrc
 
-# ignore storage dir
-storage
-
 # ignore .local dir
 .local
 

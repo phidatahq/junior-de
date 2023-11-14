@@ -22,8 +22,8 @@ Pipfile.lock
 .env
 .envrc
 
-# ignore storage dir
-storage
+# ignore everything under the storage dir
+storage/**/*
 
 # ignore .local dir
 .local
