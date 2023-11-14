@@ -1,5 +1,5 @@
 [project]
-name = "de-llm"
+name = "junior-de"
 version = "0.1.0"
 requires-python = ">3.7"
 readme = "README.md"

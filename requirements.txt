@@ -63,7 +63,7 @@ pure-eval==0.2.2
 pyarrow==14.0.1
 pydantic==2.3.0
 pydantic-core==2.6.3
-pydantic-settings==2.0.3
+pydantic-settings==2.1.0
 pydeck==0.8.1b0
 pygments==2.16.1
 pypdf==3.17.1
