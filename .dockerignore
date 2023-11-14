@@ -22,6 +22,15 @@ Pipfile.lock
 .env
 .envrc
 
+# ignore storage dir
+storage
+
+# ignore .local dir
+.local
+
+# ignore dist dir
+dist
+
 # ignore virtualenvs
 .venv
 venv*
