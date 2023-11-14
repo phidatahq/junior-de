@@ -10,6 +10,7 @@ st.set_page_config(
 st.title(":snowman: Junior Data Engineer")
 st.markdown('<a href="https://github.com/phidatahq/phidata"><h4>by phidata</h4></a>', unsafe_allow_html=True)
 
+
 def main() -> None:
     st.markdown("### Select your Junior Data Engineer:")
     st.markdown("#### 1. DuckGPT Local")

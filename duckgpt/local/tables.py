@@ -11,7 +11,6 @@ class LocalTable(BaseModel):
     path: str
 
 
-
 tables = [
     LocalTable(
         name="Movies",
