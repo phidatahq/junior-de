@@ -3,12 +3,12 @@ from typing import Optional
 from phi.llm.openai import OpenAIChat
 from phi.conversation import Conversation
 
-from duckgpt.local.storage import duckgpt_storage
-from duckgpt.local.agent import duckdb_agent
+from duckgpt.local.storage import duckgpt_local_storage
+from duckgpt.local.agent import duckdb_local_agent
 from duckgpt.local.semantic_model import get_semantic_model
 
 
-def get_duckgpt_conversation(
+def get_duckgpt_local_conversation(
     user_name: Optional[str] = None,
     conversation_id: Optional[str] = None,
     debug_mode: bool = False,
@@ -23,10 +23,10 @@ def get_duckgpt_conversation(
             max_tokens="1024",
             temperature=0,
         ),
-        storage=duckgpt_storage,
+        storage=duckgpt_local_storage,
         debug_mode=debug_mode,
         monitoring=True,
-        agents=[duckdb_agent],
+        agents=[duckdb_local_agent],
         show_function_calls=True,
         system_prompt=f"""\
         You are a Data Engineering assistant designed to answer questions using DuckDb.

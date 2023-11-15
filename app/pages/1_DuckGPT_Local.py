@@ -7,8 +7,8 @@ from app.openai_key import get_openai_key
 from app.password import check_password
 from app.reload import reload_button
 from app.user_name import get_user_name
-from duckgpt.local.conversation import duckdb_agent, get_duckgpt_conversation
-from duckgpt.local.load_tables import load_tables
+from duckgpt.local.conversation import duckdb_local_agent, get_duckgpt_local_conversation
+from duckgpt.local.load_tables import load_local_tables
 from utils.log import logger
 
 
@@ -38,7 +38,7 @@ def main() -> None:
     local_conversation: Conversation
     if "local_conversation" not in st.session_state or st.session_state["local_conversation"] is None:
         logger.info("---*--- Creating DuckGPT Conversation ---*---")
-        local_conversation = get_duckgpt_conversation(
+        local_conversation = get_duckgpt_local_conversation(
             user_name=user_name,
             debug_mode=True,
         )
@@ -87,7 +87,7 @@ def main() -> None:
 
     if st.sidebar.button("Load Tables"):
         alert = st.sidebar.info("Loading data...", icon="ℹ️")
-        load_tables(duckdb_agent=duckdb_agent)
+        load_local_tables(duckdb_agent=duckdb_local_agent)
         st.sidebar.success("Tables loaded")
         alert.empty()
 
@@ -102,7 +102,7 @@ def main() -> None:
         if st.session_state["local_conversation_id"] != new_pdf_conversation_id:
             logger.debug(f"Loading conversation {new_pdf_conversation_id}")
             logger.info("---*--- Loading DuckGPT Conversation ---*---")
-            st.session_state["local_conversation"] = get_duckgpt_conversation(
+            st.session_state["local_conversation"] = get_duckgpt_local_conversation(
                 user_name=user_name,
                 conversation_id=new_pdf_conversation_id,
                 debug_mode=True,

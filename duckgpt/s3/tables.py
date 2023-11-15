@@ -16,7 +16,7 @@ class Relationship(BaseModel):
     description: str
 
 
-tables = [
+s3_tables = [
     S3Table(
         name="Titles",
         columns=[
@@ -81,7 +81,7 @@ tables = [
     ),
 ]
 
-relationships = [
+s3_table_relationships = [
     Relationship(
         name="Title-Principals",
         type="One-to-Many",

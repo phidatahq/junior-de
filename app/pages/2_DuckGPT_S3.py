@@ -7,8 +7,8 @@ from app.openai_key import get_openai_key
 from app.password import check_password
 from app.reload import reload_button
 from app.user_name import get_user_name
-from duckgpt.s3.conversation import duckdb_agent, get_duckgpt_conversation
-from duckgpt.s3.load_tables import load_tables
+from duckgpt.s3.conversation import duckdb_s3_agent, get_duckgpt_s3_conversation
+from duckgpt.s3.load_tables import load_s3_tables
 from utils.log import logger
 
 
@@ -38,7 +38,7 @@ def main() -> None:
     s3_conversation: Conversation
     if "s3_conversation" not in st.session_state or st.session_state["s3_conversation"] is None:
         logger.info("---*--- Creating DuckGPT Conversation ---*---")
-        s3_conversation = get_duckgpt_conversation(
+        s3_conversation = get_duckgpt_s3_conversation(
             user_name=user_name,
             debug_mode=True,
         )
@@ -87,7 +87,7 @@ def main() -> None:
 
     if st.sidebar.button("Load Tables"):
         alert = st.sidebar.info("Loading data...", icon="ℹ️")
-        load_tables(duckdb_agent=duckdb_agent)
+        load_s3_tables(duckdb_agent=duckdb_s3_agent)
         st.sidebar.success("Tables loaded")
         alert.empty()
 
@@ -102,7 +102,7 @@ def main() -> None:
         if st.session_state["s3_conversation_id"] != new_pdf_conversation_id:
             logger.debug(f"Loading conversation {new_pdf_conversation_id}")
             logger.info("---*--- Loading DuckGPT Conversation ---*---")
-            st.session_state["s3_conversation"] = get_duckgpt_conversation(
+            st.session_state["s3_conversation"] = get_duckgpt_s3_conversation(
                 user_name=user_name,
                 conversation_id=new_pdf_conversation_id,
                 debug_mode=True,

@@ -11,7 +11,7 @@ class LocalTable(BaseModel):
     path: str
 
 
-tables = [
+local_tables = [
     LocalTable(
         name="Movies",
         description="Contains information about movies rom IMDB.",

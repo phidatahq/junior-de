@@ -3,12 +3,12 @@ from typing import Optional
 from phi.llm.openai import OpenAIChat
 from phi.conversation import Conversation
 
-from duckgpt.s3.storage import duckgpt_storage
-from duckgpt.s3.agent import duckdb_agent
+from duckgpt.s3.storage import duckgpt_s3_storage
+from duckgpt.s3.agent import duckdb_s3_agent
 from duckgpt.s3.semantic_model import get_semantic_model
 
 
-def get_duckgpt_conversation(
+def get_duckgpt_s3_conversation(
     user_name: Optional[str] = None,
     conversation_id: Optional[str] = None,
     debug_mode: bool = False,
@@ -23,10 +23,10 @@ def get_duckgpt_conversation(
             max_tokens="1024",
             temperature=0,
         ),
-        storage=duckgpt_storage,
+        storage=duckgpt_s3_storage,
         debug_mode=debug_mode,
         monitoring=True,
-        agents=[duckdb_agent],
+        agents=[duckdb_s3_agent],
         show_function_calls=True,
         system_prompt=f"""\
         You are a Data Engineering assistant designed to answer questions using DuckDb.
