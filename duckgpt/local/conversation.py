@@ -27,6 +27,7 @@ def get_duckgpt_local_conversation(
         debug_mode=debug_mode,
         monitoring=True,
         agents=[duckdb_local_agent],
+        function_calls=True,
         show_function_calls=True,
         system_prompt=f"""\
         You are a Data Engineering assistant designed to answer questions using DuckDb.
