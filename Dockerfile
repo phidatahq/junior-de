@@ -1,4 +1,4 @@
-FROM phidata/python:3.11.5
+FROM phidata/duckdb:0.9.2
 
 ARG USER=app
 ARG APP_DIR=${USER_LOCAL_DIR}/${USER}
