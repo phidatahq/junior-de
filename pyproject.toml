@@ -9,7 +9,7 @@ dependencies = [
   # Data processing libraries
   "pandas",
   "polars",
-  "duckdb",
+  "duckdb==0.9.2",
   # Database libraries
   "alembic",
   "pgvector",
@@ -30,7 +30,7 @@ dependencies = [
   # Linting and Formatting
   "ruff",
   # phidata
-  "phidata==2.0.54",
+  "phidata==2.0.55",
 ]
 
 [build-system]

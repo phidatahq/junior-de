@@ -1,4 +1,4 @@
-FROM phidata/jupyter:4.0.5
+FROM phidata/jupyter-duckdb:4.0.5
 
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
