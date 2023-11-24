@@ -1,6 +1,10 @@
 from typing import List
 from pydantic import BaseModel
 
+from phi.agent.duckdb import DuckDbAgent
+
+from utils.log import logger
+
 
 class S3Table(BaseModel):
     name: str
@@ -18,7 +22,7 @@ class Relationship(BaseModel):
 
 s3_tables = [
     S3Table(
-        name="Titles",
+        name="titles",
         columns=[
             "tconst",
             "titleType",
@@ -34,7 +38,7 @@ s3_tables = [
         path="s3://phi-public/imdb/titles.parquet",
     ),
     S3Table(
-        name="Name",
+        name="name",
         columns=[
             "nconst",
             "primaryName",
@@ -46,7 +50,7 @@ s3_tables = [
         path="s3://phi-public/imdb/name.parquet",
     ),
     S3Table(
-        name="Ratings",
+        name="ratings",
         columns=[
             "tconst",
             "averageRating",
@@ -56,7 +60,7 @@ s3_tables = [
         path="s3://phi-public/imdb/ratings.parquet",
     ),
     S3Table(
-        name="Principals",
+        name="principals",
         columns=[
             "tconst",
             "ordering",
@@ -69,7 +73,7 @@ s3_tables = [
         path="s3://phi-public/imdb/principals.parquet",
     ),
     S3Table(
-        name="Episode",
+        name="episode",
         columns=[
             "tconst",
             "parentTconst",
@@ -83,27 +87,35 @@ s3_tables = [
 
 s3_table_relationships = [
     Relationship(
-        name="Title-Principals",
+        name="title-principals",
         type="One-to-Many",
         keys=["tconst (in Titles)", "tconst (in Principals)"],
         description="Links titles to their main players, including actors, directors, and other key roles.",
     ),
     Relationship(
-        name="Principals-Name",
+        name="principals-name",
         type="One-to-One",
         keys=["nconst (in Principals)", "nconst (in Names)"],
         description="Represents the association of cast and crew with movie and TV show titles.",
     ),
     Relationship(
-        name="Title-Rating",
+        name="title-rating",
         type="One-to-One",
         keys=["tconst (in Titles)", "tconst (in Ratings)"],
         description="Represents the rating information for each title.",
     ),
     Relationship(
-        name="Title-Episode",
+        name="title-episode",
         type="One-to-Many",
         keys=["tconst (in Titles)", "parentTconst (in Episode)"],
         description="Links episodes to their parent TV show title.",
     ),
 ]
+
+
+def load_s3_tables(duckdb_agent: DuckDbAgent) -> None:
+    """Load S3 tables to DuckDB"""
+
+    for table in s3_tables:
+        duckdb_agent.create_table_from_path(path=table.path, table=table.name)
+        logger.info(f"Created table: {table.name}")
