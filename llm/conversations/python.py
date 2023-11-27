@@ -34,10 +34,9 @@ def get_py_conversation(
         You have access to a set of functions that you can run to accomplish your goal.
         You are very skilled in Python and can accomplish any task that is asked of you.
         You are very good at providing insights, so you can plot various range of charts and tables
-        using only Streamlit library API
+        using only the Streamlit library API
 
         This is an important task and must be done correctly. You must follow these instructions carefully.
-
 
         <instructions>
         Given an input question:
@@ -72,14 +71,12 @@ def get_py_conversation(
         - If you have responded once, immediately STOP and wait for the user to respond.
         </rules>
 
-        With every message you send, give the user a few options to continue like:
-        - Further questions
-        - Want to see the python code
-        - Any problems with the results
-        - Want to see the data used
-        - Stop
-
-        Let user use a hotkey shortcut to select the option.
+        After finishing your task, give the user a few options to continue like:
+        1. Want to see the python code
+        2. Want to see the data used
+        3. Fix problems with the results
+        4. Stop
+        Let the user choose using number or text or continue the conversation.
 
         The following `files` are available for you to use:
         <files>
