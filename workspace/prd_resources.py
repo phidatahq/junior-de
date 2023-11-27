@@ -143,7 +143,7 @@ prd_db = DbInstance(
     db_name="llm",
     port=prd_db_port,
     engine="postgres",
-    engine_version="15.4",
+    engine_version="16.1",
     allocated_storage=64,
     # NOTE: For production, use a larger instance type.
     # Last checked price: ~$25 per month

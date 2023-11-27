@@ -10,4 +10,3 @@ def get_files() -> str:
         "csv_files": [c.model_dump(exclude_none=True) for c in csv_files],
     }
     return json.dumps(files, indent=4)
-

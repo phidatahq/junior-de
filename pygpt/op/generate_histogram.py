@@ -1,29 +1,31 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-# Function to load movie data
-def load_movie_data(filepath):
-    return pd.read_csv(filepath)
+# Function to read the movies data
+def read_movies_data(file_path):
+    return pd.read_csv(file_path)
 
-# Function to analyze movie ratings and decide on bucket size
-def calculate_bucket_size(ratings):
-    range_of_ratings = ratings.max() - ratings.min()
-    # Sturges' rule can be a good starting point for choosing number of bins
-    num_bins = int(np.ceil(np.log2(len(ratings)) + 1))
-    bucket_size = round(range_of_ratings / num_bins, 2)
-    return bucket_size
-
-# Function to create a histogram of movies by rating
-def generate_histogram(data, bucket_size):
-    plt.hist(data['Rating'], bins=np.arange(data['Rating'].min(), data['Rating'].max() + bucket_size, bucket_size))
+# Function to generate and save histogram
+def generate_histogram(data, num_bins, file_name):
+    plt.hist(data, bins=num_bins, edgecolor='black')
     plt.title('Histogram of Movies by Rating')
     plt.xlabel('Rating')
     plt.ylabel('Number of Movies')
-    plt.show()
+    plt.savefig(file_name)
+    plt.close()
 
-# Main function to load data and create histogram
 if __name__ == "__main__":
-    movie_data = load_movie_data('/Users/zu/lab/templates/junior-de/data/imdb/Movies.csv')
-    bucket_size = calculate_bucket_size(movie_data['Rating'])
-    generate_histogram(movie_data, bucket_size)
+    # Path to the movies CSV file
+    file_path = '/Users/zu/lab/templates/junior-de/data/imdb/Movies.csv'
+    # Read the movies data
+    movies_df = read_movies_data(file_path)
+    # Determine the range of movie ratings
+    min_rating = movies_df['Rating'].min()
+    max_rating = movies_df['Rating'].max()
+    # Decide the bucket size: aiming for a bucket every 0.5 points
+    bucket_size = 0.5
+    num_bins = int((max_rating - min_rating) / bucket_size)
+    # Generate and save histogram
+    histogram_file = 'movies_rating_histogram.png'
+    generate_histogram(movies_df['Rating'], num_bins, histogram_file)

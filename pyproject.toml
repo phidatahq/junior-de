@@ -30,7 +30,7 @@ dependencies = [
   # Linting and Formatting
   "ruff",
   # phidata
-  "phidata==2.0.59",
+  "phidata==2.0.60",
 ]
 
 [build-system]

@@ -15,6 +15,7 @@ def main() -> None:
     st.markdown("### Select your Junior Data Engineer:")
     st.markdown("#### 1. DuckGPT Local")
     st.markdown("#### 2. DuckGPT S3")
+    st.markdown("#### 3. PyGPT")
     st.sidebar.success("Select App from above")
 
 
