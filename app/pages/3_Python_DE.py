@@ -11,7 +11,7 @@ from llm.conversations.python import get_py_conversation
 from utils.log import logger
 
 
-st.title(":snowman: PyGPT")
+st.title(":snowman: Python Data Engineer")
 st.markdown('<a href="https://github.com/phidatahq/phidata"><h4>by phidata</h4></a>', unsafe_allow_html=True)
 
 
