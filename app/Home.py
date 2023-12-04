@@ -13,9 +13,9 @@ st.markdown('<a href="https://github.com/phidatahq/phidata"><h4>by phidata</h4><
 
 def main() -> None:
     st.markdown("### Select your Junior Data Engineer:")
-    st.markdown("#### 1. DuckGPT Local")
-    st.markdown("#### 2. DuckGPT S3")
-    st.markdown("#### 3. Python Data Engineer")
+    st.markdown("#### 1. PyGPT: Automate data analysis with Python")
+    st.markdown("#### 2. DuckGPT Local: Query local data with DuckDB")
+    st.markdown("#### 3. DuckGPT S3: Query data in S3 with DuckDB")
     st.sidebar.success("Select App from above")
 
 
