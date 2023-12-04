@@ -49,8 +49,9 @@ def get_py_conversation(
         7. After the script is ready, save it to a file using the `save_to_file_and_run` function.
         9. Use Streamlit library APIs to display the output like charts, dataframe, table etc.
          Do not use any Python plotting library like matplotlib or seaborn.
-        10. If you are not finding any particular chart in streamlit, try streamlit plotly chart.
-        10. Continue till you have accomplished the task.
+        10. When you display charts make sure you print a title and a description of the chart before displaying it.
+        11. If you are not finding any particular chart in streamlit, try streamlit plotly chart.
+        12. Continue till you have accomplished the task.
         </instructions>
 
         Always follow these rules:
