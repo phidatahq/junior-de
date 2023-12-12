@@ -8,7 +8,7 @@ from app.password import check_password
 from app.reload import reload_button
 from app.user_name import get_user_name
 from duckgpt.s3_tables import load_s3_tables
-from llm.conversations.duckgpt_s3 import duckdb_s3_agent, get_duckgpt_s3_conversation
+from llm.conversations.duckgpt_s3 import duckdb_s3_tools, get_duckgpt_s3_conversation
 from utils.log import logger
 
 
@@ -87,7 +87,7 @@ def main() -> None:
 
     if st.sidebar.button("Load All Tables"):
         alert = st.sidebar.info("Loading data...", icon="ℹ️")
-        load_s3_tables(duckdb_agent=duckdb_s3_agent)
+        load_s3_tables(duckdb_tools=duckdb_s3_tools)
         st.sidebar.success("Tables loaded")
         alert.empty()
 

@@ -8,7 +8,7 @@ from app.password import check_password
 from app.reload import reload_button
 from app.user_name import get_user_name
 from duckgpt.local_tables import load_local_tables
-from llm.conversations.duckgpt_local import duckdb_local_agent, get_duckgpt_local_conversation
+from llm.conversations.duckgpt_local import duckdb_local_tools, get_duckgpt_local_conversation
 from utils.log import logger
 
 
@@ -87,7 +87,7 @@ def main() -> None:
 
     if st.sidebar.button("Load All Tables"):
         alert = st.sidebar.info("Loading data...", icon="ℹ️")
-        load_local_tables(duckdb_agent=duckdb_local_agent)
+        load_local_tables(duckdb_tools=duckdb_local_tools)
         st.sidebar.success("Tables loaded")
         alert.empty()
 

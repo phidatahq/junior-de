@@ -1,7 +1,7 @@
 from typing import List, Optional
 from pydantic import BaseModel
 
-from phi.agent.duckdb import DuckDbAgent
+from phi.tools.duckdb import DuckDbTools
 
 from workspace.settings import ws_settings
 from utils.log import logger
@@ -37,9 +37,9 @@ local_tables = [
 ]
 
 
-def load_local_tables(duckdb_agent: DuckDbAgent):
+def load_local_tables(duckdb_tools: DuckDbTools):
     """Load local tables to DuckDB"""
 
     for table in local_tables:
-        duckdb_agent.create_table_from_path(path=table.path, table=table.name)
+        duckdb_tools.create_table_from_path(path=table.path, table=table.name)
         logger.info(f"Created table: {table.name}")

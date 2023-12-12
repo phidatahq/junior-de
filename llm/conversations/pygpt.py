@@ -4,7 +4,7 @@ from phi.llm.openai import OpenAIChat
 from phi.conversation import Conversation
 
 from llm.storage import pygpt_storage
-from llm.agents.python_agent import python_agent
+from llm.tools.python_tools import python_tools
 from pygpt.files import get_files
 
 
@@ -26,7 +26,7 @@ def get_pygpt_conversation(
         storage=pygpt_storage,
         debug_mode=debug_mode,
         monitoring=True,
-        agents=[python_agent],
+        tools=[python_tools],
         function_calls=True,
         show_function_calls=True,
         system_prompt=f"""\

@@ -1,7 +1,7 @@
 from typing import List
 from pydantic import BaseModel
 
-from phi.agent.duckdb import DuckDbAgent
+from phi.tools.duckdb import DuckDbTools
 
 from utils.log import logger
 
@@ -113,9 +113,9 @@ s3_table_relationships = [
 ]
 
 
-def load_s3_tables(duckdb_agent: DuckDbAgent) -> None:
+def load_s3_tables(duckdb_tools: DuckDbTools) -> None:
     """Load S3 tables to DuckDB"""
 
     for table in s3_tables:
-        duckdb_agent.create_table_from_path(path=table.path, table=table.name)
+        duckdb_tools.create_table_from_path(path=table.path, table=table.name)
         logger.info(f"Created table: {table.name}")

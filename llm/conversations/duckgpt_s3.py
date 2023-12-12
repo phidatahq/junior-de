@@ -4,8 +4,8 @@ from phi.llm.openai import OpenAIChat
 from phi.conversation import Conversation
 
 from llm.storage import duckgpt_s3_storage
-from llm.agents.duckdb_agent import duckdb_s3_agent
-from llm.agents.file_agent import duckgpt_file_agent
+from llm.tools.duckdb_tools import duckdb_s3_tools
+from llm.tools.file_tools import duckgpt_file_tools
 from duckgpt.semantic_model import get_s3_semantic_model
 
 
@@ -27,7 +27,7 @@ def get_duckgpt_s3_conversation(
         storage=duckgpt_s3_storage,
         debug_mode=debug_mode,
         monitoring=True,
-        agents=[duckdb_s3_agent, duckgpt_file_agent],
+        tools=[duckdb_s3_tools, duckgpt_file_tools],
         function_calls=True,
         show_function_calls=True,
         system_prompt=f"""\
