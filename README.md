@@ -73,7 +73,7 @@ phi ws down
 
 ## Next Steps:
 
-- [Run the Junior DE on AWS](https://docs.phidata.com/examples/junior-de#run-on-aws)
+- [Run the Junior DE on AWS](https://docs.phidata.com/examples/ai/junior-de/run-aws)
 - [Update the dev application](https://docs.phidata.com/day-2/dev-app)
 - [Update the production application](https://docs.phidata.com/day-2/production-app)
 - [Add python dependencies](https://docs.phidata.com/day-2/python-libraries)
@@ -81,4 +81,4 @@ phi ws down
 - [Secret management](https://docs.phidata.com/day-2/secrets)
 - [CI/CD](https://docs.phidata.com/day-2/ci-cd)
 - [Add database tables](https://docs.phidata.com/day-2/database-tables)
-- [Read the LLM App guide](https://docs.phidata.com/examples/junior-de)
+- [Read the Junior App guide](https://docs.phidata.com/examples/ai/junior-de)

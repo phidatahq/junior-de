@@ -9,7 +9,7 @@ from workspace.settings import ws_settings
 
 # -*- Jupyter image
 jupyter_image = DockerImage(
-    name=f"{ws_settings.image_repo}/{ws_settings.ws_name}-lab",
+    name=f"{ws_settings.image_repo}/jupyter-{ws_settings.ws_name}",
     tag=ws_settings.dev_env,
     enabled=(ws_settings.build_images and ws_settings.dev_jupyter_enabled),
     path=str(ws_settings.ws_root),
@@ -20,7 +20,7 @@ jupyter_image = DockerImage(
 
 # -*- Jupyter running on port 8888:8888
 dev_jupyter_app = Jupyter(
-    name=f"{ws_settings.ws_name}-lab",
+    name=f"jupyter-{ws_settings.ws_name}",
     enabled=ws_settings.dev_jupyter_enabled,
     image=jupyter_image,
     mount_workspace=True,

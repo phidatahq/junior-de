@@ -19,8 +19,7 @@ dev_image = DockerImage(
     enabled=ws_settings.build_images,
     path=str(ws_settings.ws_root),
     pull=ws_settings.force_pull_images,
-    # Uncomment to push the dev image
-    # push_image=ws_settings.push_images,
+    push_image=ws_settings.push_images,
     skip_docker_cache=ws_settings.skip_image_cache,
 )
 
@@ -28,9 +27,9 @@ dev_image = DockerImage(
 dev_db = PgVectorDb(
     name=f"{ws_settings.ws_name}-db",
     enabled=ws_settings.dev_db_enabled,
-    pg_user="llm",
-    pg_password="llm",
-    pg_database="llm",
+    pg_user="app",
+    pg_password="app",
+    pg_database="app",
     # Connect to this db on port 5432
     host_port=5432,
     debug_mode=True,
@@ -55,7 +54,7 @@ container_env = {
 
 # -*- Streamlit running on port 8501:8501
 dev_streamlit = Streamlit(
-    name=f"{ws_settings.ws_name}-app",
+    name=ws_settings.ws_name,
     enabled=ws_settings.dev_app_enabled,
     image=dev_image,
     command="streamlit run app/Home.py",

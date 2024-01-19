@@ -1,0 +1,10 @@
+{
+  "data_files": [
+      {
+          "name": "movies",
+          "type": "csv",
+          "description": "Contains information about movies from IMDB.",
+          "path": "https://phidata-public.s3.amazonaws.com/demo_data/IMDB-Movie-Data.csv"
+      }
+  ]
+}
