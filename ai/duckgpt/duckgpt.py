@@ -30,7 +30,7 @@ def get_duckgpt(
         update_knowledge_base=True,
         followups=True,
         monitoring=True,
-        tool_calls=True,
+        use_tools=True,
         show_tool_calls=True,
         debug_mode=debug_mode,
         # Provide information about the tables the data assistant can access in the prompt

@@ -28,7 +28,7 @@ def get_pygpt(
         storage=pygpt_storage,
         knowledge_base=pygpt_knowledge_base,
         monitoring=True,
-        tool_calls=True,
+        use_tools=True,
         show_tool_calls=True,
         debug_mode=debug_mode,
         charting_libraries=["streamlit"],
