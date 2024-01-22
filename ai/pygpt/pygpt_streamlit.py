@@ -30,9 +30,9 @@ def get_pygpt(
         monitoring=True,
         use_tools=True,
         show_tool_calls=True,
-        debug_mode=debug_mode,
-        charting_libraries=["streamlit"],
         followups=True,
+        charting_libraries=["streamlit"],
+        debug_mode=debug_mode,
         base_dir=ws_settings.ws_root.joinpath("ai", "pygpt", "scratch"),
         # Provide information about the files the python assistant can access in the prompt
         # file_information=ws_settings.ws_root.joinpath("ai", "pygpt", "knowledge", "files.json").read_text(),

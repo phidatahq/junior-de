@@ -27,12 +27,12 @@ def get_duckgpt(
         ),
         storage=duckgpt_storage,
         knowledge_base=duckgpt_knowledge_base,
-        update_knowledge_base=True,
-        followups=True,
         monitoring=True,
         use_tools=True,
         show_tool_calls=True,
+        followups=True,
         debug_mode=debug_mode,
+        base_dir=ws_settings.ws_root.joinpath("ai", "duckgpt", "queries"),
         # Provide information about the tables the data assistant can access in the prompt
         # semantic_model=ws_settings.ws_root.joinpath("ai", "duckgpt", "knowledge", "tables.json").read_text(),
     )

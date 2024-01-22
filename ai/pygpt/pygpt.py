@@ -6,7 +6,7 @@ from phi.llm.openai import OpenAIChat
 from ai.settings import ai_settings
 from ai.storage import pygpt_storage
 from ai.knowledge_base import pygpt_knowledge_base
-
+from workspace.settings import ws_settings
 
 def get_pygpt(
     run_id: Optional[str] = None,
@@ -31,6 +31,7 @@ def get_pygpt(
         pip_install=True,
         show_tool_calls=True,
         debug_mode=debug_mode,
+        base_dir=ws_settings.ws_root.joinpath("ai", "pygpt", "scratch"),
         # Provide information about the files the python assistant can access in the prompt
         # file_information=ws_settings.ws_root.joinpath("ai", "pygpt", "knowledge", "files.json").read_text(),
     )
