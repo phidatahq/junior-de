@@ -12,9 +12,12 @@ from phi.tools.streamlit.components import (
 from ai.duckgpt.duckgpt import get_duckgpt
 from utils.log import logger
 
-
-st.title(":snowman: DuckGPT")
-st.markdown('<a href="https://github.com/phidatahq/phidata"><h4>by phidata</h4></a>', unsafe_allow_html=True)
+st.set_page_config(
+    page_title="DuckGPT",
+    page_icon=":orange_heart:",
+)
+st.title("DuckGPT")
+st.markdown("##### :orange_heart: built using [phidata](https://github.com/phidatahq/phidata)")
 
 
 def restart_assistant():
@@ -33,7 +36,8 @@ def main() -> None:
     if username:
         st.sidebar.info(f":technologist: User: {username}")
     else:
-        st.write(":technologist: Please enter a username")
+        st.markdown("---")
+        st.markdown("#### :technologist: Enter a username and start chatting")
         return
 
     # Get the assistant
@@ -88,11 +92,12 @@ def main() -> None:
     if last_message.get("role") == "user":
         question = last_message["content"]
         with st.chat_message("assistant"):
-            response = ""
-            resp_container = st.empty()
-            for delta in duckgpt.run(question):
-                response += delta  # type: ignore
-                resp_container.markdown(response)
+            with st.spinner("Working..."):
+                response = ""
+                resp_container = st.empty()
+                for delta in duckgpt.run(question):
+                    response += delta  # type: ignore
+                    resp_container.markdown(response)
 
             st.session_state["messages"].append({"role": "assistant", "content": response})
 
@@ -112,24 +117,6 @@ def main() -> None:
 
     if st.sidebar.button("Auto Rename"):
         duckgpt.auto_rename_run()
-
-    # Upload CSV
-    # if duckgpt.knowledge_base:
-    #     if "file_uploader_key" not in st.session_state:
-    #         st.session_state["file_uploader_key"] = 0
-
-    #     uploaded_file = st.sidebar.file_uploader(
-    #         "Upload CSV",
-    #         type="csv",
-    #         key=st.session_state["file_uploader_key"],
-    #     )
-    #     if uploaded_file is not None:
-    #         alert = st.sidebar.info("Processing CSV...", icon="ℹ️")
-    #         csv_name = uploaded_file.name.split(".")[0]
-    #         if f"{csv_name}_uploaded" not in st.session_state:
-    #             # TODO: Save CSV and add to knowledge base
-    #             st.session_state[f"{csv_name}_uploaded"] = True
-    #         alert.empty()
 
     if duckgpt.storage:
         all_duckgpt_run_ids: List[str] = duckgpt.storage.get_all_run_ids(user_id=username)

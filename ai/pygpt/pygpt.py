@@ -8,6 +8,7 @@ from ai.storage import pygpt_storage
 from ai.knowledge_base import pygpt_knowledge_base
 from workspace.settings import ws_settings
 
+
 def get_pygpt(
     run_id: Optional[str] = None,
     user_id: Optional[str] = None,

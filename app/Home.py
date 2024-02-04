@@ -6,9 +6,8 @@ st.set_page_config(
     page_title="Data Engineering AI",
     page_icon=":snowman:",
 )
-
-st.title(":snowman: Junior Data Engineer AI")
-st.markdown('<a href="https://github.com/phidatahq/phidata"><h4>by phidata</h4></a>', unsafe_allow_html=True)
+st.title("Junior Data Engineer")
+st.markdown("##### :orange_heart: built using [phidata](https://github.com/phidatahq/phidata)")
 
 
 def main() -> None:
