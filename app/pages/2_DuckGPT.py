@@ -1,7 +1,7 @@
 from typing import List
 
 import streamlit as st
-from phi.assistant.python import PythonAssistant
+from phi.assistant.duckdb import DuckDbAssistant
 from phi.tools.streamlit.components import (
     get_openai_key_sidebar,
     check_password,
@@ -9,20 +9,25 @@ from phi.tools.streamlit.components import (
     get_username_sidebar,
 )
 
-from ai.pygpt.pygpt_streamlit import get_pygpt
+from ai.duckgpt.duckgpt import get_duckgpt
 from utils.log import logger
 
 st.set_page_config(
-    page_title="PyGPT",
+    page_title="DuckGPT",
     page_icon=":orange_heart:",
 )
-st.title("PyGPT")
+st.title("DuckGPT")
 st.markdown("##### :orange_heart: built using [phidata](https://github.com/phidatahq/phidata)")
+with st.expander(":rainbow[:point_down: Ask questions like]"):
+    st.markdown("- Give me a histogram of movies by rating")
+    st.markdown("- Show me the revenue over time")
+    st.markdown("- Who is the most popular actor")
 
 
 def restart_assistant():
-    st.session_state["pygpt"] = None
-    st.session_state["pygpt_run_id"] = None
+    st.session_state["duckgpt"] = None
+    st.session_state["duckgpt_run_id"] = None
+    st.session_state["file_uploader_key"] += 1
     st.rerun()
 
 
@@ -40,37 +45,37 @@ def main() -> None:
         return
 
     # Get the assistant
-    pygpt: PythonAssistant
-    if "pygpt" not in st.session_state or st.session_state["pygpt"] is None:
-        logger.info("---*--- Creating PyGPT ---*---")
-        pygpt = get_pygpt(
+    duckgpt: DuckDbAssistant
+    if "duckgpt" not in st.session_state or st.session_state["duckgpt"] is None:
+        logger.info("---*--- Creating DuckGPT ---*---")
+        duckgpt = get_duckgpt(
             user_id=username,
             debug_mode=True,
         )
-        st.session_state["pygpt"] = pygpt
+        st.session_state["duckgpt"] = duckgpt
     else:
-        pygpt = st.session_state["pygpt"]
+        duckgpt = st.session_state["duckgpt"]
 
     # Create assistant run (i.e. log to database) and save run_id in session state
-    st.session_state["pygpt_run_id"] = pygpt.create_run()
+    st.session_state["duckgpt_run_id"] = duckgpt.create_run()
 
     # Check if knowlege base exists
-    if pygpt.knowledge_base and (
-        "pygpt_kb_loaded" not in st.session_state or not st.session_state["pygpt_kb_loaded"]
+    if duckgpt.knowledge_base and (
+        "duckgpt_kb_loaded" not in st.session_state or not st.session_state["duckgpt_kb_loaded"]
     ):
-        if not pygpt.knowledge_base.exists():
+        if not duckgpt.knowledge_base.exists():
             logger.info("Knowledge base does not exist")
             loading_container = st.sidebar.info("🧠 Loading knowledge base")
-            pygpt.knowledge_base.load()
-            st.session_state["pygpt_kb_loaded"] = True
+            duckgpt.knowledge_base.load()
+            st.session_state["duckgpt_kb_loaded"] = True
             st.sidebar.success("Knowledge base loaded")
             loading_container.empty()
 
     # Load messages for existing assistant
-    user_chat_history = pygpt.memory.get_chat_history()
-    if len(user_chat_history) > 0:
+    assistant_chat_history = duckgpt.memory.get_chat_history()
+    if len(assistant_chat_history) > 0:
         logger.debug("Loading chat history")
-        st.session_state["messages"] = user_chat_history
+        st.session_state["messages"] = assistant_chat_history
     else:
         logger.debug("No chat history found")
         st.session_state["messages"] = [{"role": "assistant", "content": "Ask me anything..."}]
@@ -94,7 +99,7 @@ def main() -> None:
             with st.spinner("Working..."):
                 response = ""
                 resp_container = st.empty()
-                for delta in pygpt.run(question):
+                for delta in duckgpt.run(question):
                     response += delta  # type: ignore
                     resp_container.markdown(response)
 
@@ -103,36 +108,36 @@ def main() -> None:
     if st.sidebar.button("New Run"):
         restart_assistant()
 
-    if pygpt.knowledge_base:
+    if duckgpt.knowledge_base:
         if st.sidebar.button("Update Knowledge Base"):
-            pygpt.knowledge_base.load(recreate=False)
-            st.session_state["pygpt_kb_loaded"] = True
+            duckgpt.knowledge_base.load(recreate=False)
+            st.session_state["duckgpt_kb_loaded"] = True
             st.sidebar.success("Knowledge base updated")
 
         if st.sidebar.button("Recreate Knowledge Base"):
-            pygpt.knowledge_base.load(recreate=True)
-            st.session_state["pygpt_kb_loaded"] = True
+            duckgpt.knowledge_base.load(recreate=True)
+            st.session_state["duckgpt_kb_loaded"] = True
             st.sidebar.success("Knowledge base recreated")
 
     if st.sidebar.button("Auto Rename"):
-        pygpt.auto_rename_run()
+        duckgpt.auto_rename_run()
 
-    if pygpt.storage:
-        all_pygpt_run_ids: List[str] = pygpt.storage.get_all_run_ids(user_id=username)
-        new_pygpt_run_id = st.sidebar.selectbox("Run ID", options=all_pygpt_run_ids)
-        if st.session_state["pygpt_run_id"] != new_pygpt_run_id:
-            logger.debug(f"Loading run {new_pygpt_run_id}")
-            logger.info("---*--- Loading PyGPT Run ---*---")
-            st.session_state["pygpt"] = get_pygpt(
+    if duckgpt.storage:
+        all_duckgpt_run_ids: List[str] = duckgpt.storage.get_all_run_ids(user_id=username)
+        new_duckgpt_run_id = st.sidebar.selectbox("Run ID", options=all_duckgpt_run_ids)
+        if st.session_state["duckgpt_run_id"] != new_duckgpt_run_id:
+            logger.debug(f"Loading run {new_duckgpt_run_id}")
+            logger.info("---*--- Loading DuckGPT Run ---*---")
+            st.session_state["duckgpt"] = get_duckgpt(
                 user_id=username,
-                run_id=new_pygpt_run_id,
+                run_id=new_duckgpt_run_id,
                 debug_mode=True,
             )
             st.rerun()
 
-    pygpt_run_name = pygpt.run_name
-    if pygpt_run_name:
-        st.sidebar.write(f":thread: {pygpt_run_name}")
+    duckgpt_run_name = duckgpt.run_name
+    if duckgpt_run_name:
+        st.sidebar.write(f":thread: {duckgpt_run_name}")
 
     # Show reload button
     reload_button_sidebar()

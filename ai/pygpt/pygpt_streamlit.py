@@ -32,6 +32,7 @@ def get_pygpt(
         show_tool_calls=True,
         followups=True,
         charting_libraries=["streamlit"],
+        extra_instructions=["REMEMBER TO ALWAYS USE STREAMLIT FOR CHARTING"],
         debug_mode=debug_mode,
         base_dir=ws_settings.ws_root.joinpath("ai", "pygpt", "scratch"),
         # Provide information about the files the python assistant can access in the prompt
