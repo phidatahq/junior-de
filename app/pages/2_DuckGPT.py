@@ -19,7 +19,7 @@ st.set_page_config(
 st.title("DuckGPT")
 st.markdown("##### :orange_heart: built using [phidata](https://github.com/phidatahq/phidata)")
 with st.expander(":rainbow[:point_down: Ask questions like]"):
-    st.markdown("- Give me a histogram of movies by rating")
+    st.markdown("- Show me a histogram of movies by rating, choose a suitable bucket size")
     st.markdown("- Show me the revenue over time")
     st.markdown("- Who is the most popular actor")
 
