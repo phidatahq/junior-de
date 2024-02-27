@@ -58,7 +58,7 @@ pandas==2.2.0
 parso==0.8.3
 pexpect==4.9.0
 pgvector==0.2.4
-phidata==2.3.39
+phidata==2.3.45
 pillow==10.2.0
 plotly==5.18.0
 polars==0.20.6
