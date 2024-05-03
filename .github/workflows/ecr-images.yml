@@ -70,4 +70,4 @@ jobs:
           file: workspace/jupyter/jupyter.Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.ECR_REPO }}/junior-de-lab:dev
+          tags: ${{ env.ECR_REPO }}/jupyter-junior-de:dev

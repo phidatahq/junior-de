@@ -54,4 +54,4 @@ jobs:
           file: workspace/jupyter/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_REPO }}/junior-de-lab:dev
+          tags: ${{ secrets.DOCKERHUB_REPO }}/jupyter-junior-de:dev
